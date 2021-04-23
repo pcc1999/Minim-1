@@ -1,0 +1,100 @@
+<br>
+<br>
+<h1 style="text-align: center">Institucions</h1>
+<div id="container">
+  <div class="column-list">
+    <div class="margin-sides">
+      <p>Institutions</p>
+      <button class="btn btn-primary" type="button" id="addInstitution" data-toggle="modal" data-target="#newInstitution">Add new Institution</button>
+      <mat-card class="mat-card-list">
+        <mat-list role="list">
+          <mat-list-item *ngFor="let institution of institutions"
+                         class="no-pad list-item"
+                         role="listitem"
+                         (click)="institutionSelect(institution)">
+            <div class="text">
+              <h5>{{institution.name}}</h5>
+            </div>
+            <button class="btn btn-primary" type="button" id="institucionDetailsButton" data-toggle="modal" data-target="#institutionDetails">View Details</button>
+          </mat-list-item>
+        </mat-list>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="newInstitution" tabindex="-1" role="dialog" aria-labelledby="institutionLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="institutionLabel">New Institution</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="newInstitutionForm">
+          <div class="form-group">
+            <div class="example-container">
+              <input type="text" id="institutionName" formControlName="institutionName" placeholder="Institution Name" [(ngModel)]="name"/>
+            </div>
+            <div class="example-container">
+              <input type="text" id="institutionDescription" formControlName="institutionDescription" placeholder="Description" [(ngModel)]="description"/>
+            </div>
+            <div class="example-container">
+              <input type="text" id="institutionUrl" formControlName="institutionUrl" placeholder="Institution URL" [(ngModel)]="url"/>
+            </div>
+            <div class="example-container">
+              <input type="text" id="institutionResponsable" formControlName="institutionResponsable" placeholder="Institution Responsable" [(ngModel)]="responsable"/>
+            </div>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.name">
+                <div class="alert alert-danger" *ngIf="newInstitutionForm.get('institutionName').hasError(validation.type)">
+                  {{ validation.message }}
+                </div>
+              </ng-container>
+              <ng-container *ngFor="let validation of validation_messages.responsable">
+                <div class="alert alert-danger" *ngIf="newInstitutionForm.get('institutionResponsable').hasError(validation.type)">
+                  {{ validation.message }}
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" [disabled]="!newInstitutionForm.valid" (click)="addInstitution()" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="institutionDetails" tabindex="-1" role="dialog" aria-labelledby="institutionDetailLabel" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="institutionDetailLabel">Institution Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="detailsInstitutionForm">
+          <div class="form-group">
+            <div class="example-container" *ngIf="currentInstitution">
+              <p>{{'Name: '+currentInstitution.name}}</p>
+              <p>{{'Description: '+currentInstitution.description}}</p>
+              <p>{{'Url: '+currentInstitution.url}}</p>
+              <p>{{'Responsable : '+currentInstitution.responsable}}</p>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="removeInstitution()" data-dismiss="modal">Remove Institution</button>
+      </div>
+    </div>
+  </div>
+</div>
