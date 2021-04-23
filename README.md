@@ -2,16 +2,16 @@
  
 **Per inicialitzar el backend:**
 
-*cd backend
+*cd backend*
 
-*npm run start
+*npm run start*
 
 
 
 **Per inicialitzar el frontend:**
 
-*cd frontend
+*cd frontend*
 
-*ng serve
+*ng serve*
 
 El backend està a localhost:3000 i el frontend a localhost:4200
