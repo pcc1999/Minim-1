@@ -4,7 +4,7 @@ let morgan = require("morgan");
 
 const app = express();
 
-import indexRoutes from './routes/schoolService'
+import indexRoutes from './routes/institutionService'
 
 
 //settings
